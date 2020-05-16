@@ -11,7 +11,7 @@ var User = require('./models/user.js')
 mongoose.connect('mongodb://localhost/stack_overflow', { useNewUrlParser: true });
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', function () {
+db.once('open', function() {
     console.log('connected');
 });
 
@@ -22,13 +22,13 @@ app.use(cors())
 app.use(bodyparser.json());
 app.use(bodyparser.urlencoded({ extended: true }));
 
-app.post('/authenticate', async (req, res) => {
-    const { emailID, password } = req.body;
-    user = await User.findOne({ emailID: emailID, password: password })
+app.post('/authenticate', async(req, res) => {
+    const { email, password } = req.body;
+    user = await User.findOne({ email: email, password: password })
     if (!user) return res.json({ status: 'Username or password is incorrect' });
     return res.json({
         status: 'Success',
-        id: user.emailId,
+        id: user.email,
         username: user.username,
         firstName: user.firstName,
         lastName: user.lastName,
@@ -36,14 +36,14 @@ app.post('/authenticate', async (req, res) => {
     })
 })
 
-app.post('/register', async (req, res) => {
+app.post('/register', async(req, res) => {
     console.log("Got request")
     let user = new User(req.body)
-
-    let usr = await User.findOne({ emailID: user.emailID }).exec();
-    if (usr) return res.json({ Status: 'Email Already in Use' })
+    console.log(req.body);
+    let usr = await User.findOne({ email: user.email }).exec();
+    if (usr) return res.json({ status: 'An Account With this Email Already Exists, Please Log in' })
     usr = await User.findOne({ username: user.username }).exec();
-    if (usr) return res.json({ Status: 'Username Already Exists' })
+    if (usr) return res.json({ status: 'Username Already Exists' })
 
     user.save()
     return res.json({ status: 'Success' })
