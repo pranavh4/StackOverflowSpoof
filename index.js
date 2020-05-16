@@ -23,12 +23,12 @@ app.use(bodyparser.json());
 app.use(bodyparser.urlencoded({ extended: true }));
 
 app.post('/authenticate', async (req, res) => {
-    const { emailID, password } = req.body;
-    user = await User.findOne({ emailID: emailID, password: password })
+    const { email, password } = req.body;
+    user = await User.findOne({ email: email, password: password })
     if (!user) return res.json({ status: 'Username or password is incorrect' });
     return res.json({
         status: 'Success',
-        id: user.emailId,
+        id: user.email,
         username: user.username,
         firstName: user.firstName,
         lastName: user.lastName,
@@ -40,7 +40,7 @@ app.post('/register', async (req, res) => {
     console.log("Got request")
     let user = new User(req.body)
 
-    let usr = await User.findOne({ emailID: user.emailID }).exec();
+    let usr = await User.findOne({ email: user.email }).exec();
     if (usr) return res.json({ Status: 'Email Already in Use' })
     usr = await User.findOne({ username: user.username }).exec();
     if (usr) return res.json({ Status: 'Username Already Exists' })
@@ -59,6 +59,12 @@ app.post('/submitAnswer', (req, res) => {
     let ans = new Answer(req.body)
     ans.save()
     return res.json({ status: 'Success' })
+})
+
+app.get('/findQuestions', async (req, res) => {
+    let { queryString } = req.body
+    let words = queryString.split(' ')
+    let ques = Question.find({ keywords: { $in: words } })
 })
 
 app.get('*', (req, res) => {
