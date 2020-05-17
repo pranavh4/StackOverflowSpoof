@@ -160,9 +160,9 @@ app.get('/currentUser', async (req, res) => {
     return res.json(user)
 })
 
-app.get('/getUserQuestions', async (req, res) => {
-
-})
+// app.get('/getUserQuestions', async (req, res) => {
+//     let ques = await Question
+// })
 
 app.get('/login', checkNotAuthenticated, (req, res) => {
     res.sendFile(path.join(__dirname, 'dist/StackOverflow/index.html'));
