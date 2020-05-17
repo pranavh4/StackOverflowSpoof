@@ -15,6 +15,7 @@ var User = require('./models/user.js')
 const initializePassport = require('./passport-config')
 const passport = require('passport')
 const session = require('express-session')
+var cookieParser = require('cookie-parser')
 
 mongoose.connect('mongodb://localhost/stack_overflow', { useNewUrlParser: true });
 var db = mongoose.connection;
@@ -55,6 +56,7 @@ let generateKeywords = str => {
 var app = express();
 app.use(express.static(path.join(__dirname, 'dist/StackOverflow'), { index: false }));
 app.use(cors())
+app.use(cookieParser(process.env.SESSION_SECRET))
 app.use(bodyparser.json());
 app.use(bodyparser.urlencoded({ extended: true }));
 app.use(session({
@@ -78,7 +80,28 @@ app.post('/authenticate', async (req, res) => {
     })
 })
 
-app.post('/login', checkNotAuthenticated, passport.authenticate('local'))
+// app.post('/login', checkNotAuthenticated, passport.authenticate('local', {
+//     successRedirect: '/',
+//     failureRedirect: '/login'
+// }))
+
+app.post('/login', checkNotAuthenticated, function (req, res, next) {
+    passport.authenticate('local', function (err, user, info) {
+        console.log(req.body)
+        if (err) { return next(err); }
+        if (!user) {
+            return res.json({ status: "Failure" }, ...info);
+            // console.log("Error logging in")
+            // return res.redirect('/login')
+        }
+        req.login(user, function (err) {
+            if (err) { return next(err); }
+            return res.json({ user: user, status: "Success" });
+            // console.log("Logged in")
+            // return res.redirect('/')
+        });
+    })(req, res, next);
+});
 
 app.post('/register', async (req, res) => {
     console.log("Got request")
@@ -125,7 +148,12 @@ app.get('/findQuestions', async (req, res) => {
 //     res.sendFile(path.join(__dirname, 'dist/StackOverflow/index.html'));
 // })
 
-app.get('/login', (req, res) => {
+app.get('/currentUser', async (req, res) => {
+    let user = await req.user
+    return res.json(user)
+})
+
+app.get('/login', checkNotAuthenticated, (req, res) => {
     res.sendFile(path.join(__dirname, 'dist/StackOverflow/index.html'));
 });
 
