@@ -55,14 +55,19 @@ let generateKeywords = str => {
 
 var app = express();
 app.use(express.static(path.join(__dirname, 'dist/StackOverflow'), { index: false }));
-app.use(cors())
+app.use(cors({
+    origin: [
+        "http://localhost:4200"
+    ], credentials: true
+}));
 app.use(cookieParser(process.env.SESSION_SECRET))
 app.use(bodyparser.json());
 app.use(bodyparser.urlencoded({ extended: true }));
 app.use(session({
     secret: process.env.SESSION_SECRET,
     resave: false,
-    saveUninitialized: false
+    saveUninitialized: false,
+    cookie: { secure: false }
 }))
 app.use(passport.initialize())
 app.use(passport.session())
@@ -126,9 +131,10 @@ app.post('/submitAnswer', (req, res) => {
     let ans = new Answer({ ...req.body, upvotes: 0, downvotes: 0 })
     ans.save()
     return res.json({ status: 'Success' })
+
 })
 
-app.get('/getAnswers', async (req, res) => {
+app.get('/getPost', async (req, res) => {
     let { questionID } = req.query
     let ans = await Answer.find({ questionID: questionID }).sort({ upvotes: -1 }).exec()
     let ques = await Question.findById(questionID)
@@ -150,7 +156,12 @@ app.get('/findQuestions', async (req, res) => {
 
 app.get('/currentUser', async (req, res) => {
     let user = await req.user
+    console.log(req.cookies)
     return res.json(user)
+})
+
+app.get('/getUserQuestions', async (req, res) => {
+
 })
 
 app.get('/login', checkNotAuthenticated, (req, res) => {
