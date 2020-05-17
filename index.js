@@ -160,9 +160,16 @@ app.get('/currentUser', async (req, res) => {
     return res.json(user)
 })
 
-// app.get('/getUserQuestions', async (req, res) => {
-//     let ques = await Question
-// })
+app.get('/getUserQuestions', async (req, res) => {
+    let username = req.query.username
+    let ques = await Question.find({ user: username }).sort({ upvotes: -1 }).exec()
+    let ans = await Answer.find({ user: username })
+    ans = ans.map(a => a.questionID)
+    console.log(ans)
+    let q_ans = await Question.find({ _id: { $in: ans } }).exec()
+    return res.json({ askedQuestions: ques, answeredQuestions: q_ans })
+})
+
 
 app.get('/login', checkNotAuthenticated, (req, res) => {
     res.sendFile(path.join(__dirname, 'dist/StackOverflow/index.html'));
