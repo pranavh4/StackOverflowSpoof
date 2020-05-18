@@ -124,14 +124,14 @@ app.post('/register', async (req, res) => {
 
 app.post('/submitQuestion', async (req, res) => {
     // console.log(req.body)
-    let ques = new Question({ ...req.body, keywords: generateKeywords(req.body.heading), upvotes: 0, downvotes: 0 })
+    let ques = new Question({ ...req.body, keywords: generateKeywords(req.body.heading), upvotes: [], downvotes: [] })
     let resp = await ques.save()
     // console.log(resp)
     return res.json({ status: 'Success', questionID: resp._id })
 })
 
 app.post('/submitAnswer', (req, res) => {
-    let ans = new Answer({ ...req.body, upvotes: 0, downvotes: 0 })
+    let ans = new Answer({ ...req.body, upvotes: [], downvotes: [] })
     ans.save()
     return res.json({ status: 'Success' })
 
@@ -198,10 +198,37 @@ app.post('/upvote', async (req, res) => {
         qna = await Question.findById(_id).exec()
     else
         qna = await Answer.findById(_id).exec()
-    console.log(qna)
-    qna.upvotes += 1
+    // console.log(qna)
+    let index = qna.downvotes.indexOf(username)
+    console.log("index " + index)
+    if (index > -1) {
+        console.log("Removing downvote")
+        qna.downvotes.splice(index, 1)
+    }
+    qna.upvotes.push(username)
     let resp = await qna.save()
-    return res.json({ status: 'Success' })
+    console.log(resp)
+    return res.json(resp)
+})
+
+app.post('/downvote', async (req, res) => {
+    let { type, _id, username } = req.body
+    let qna
+    if (type == 'Question')
+        qna = await Question.findById(_id).exec()
+    else
+        qna = await Answer.findById(_id).exec()
+    // console.log(qna)
+    let index = qna.upvotes.indexOf(username)
+    console.log("index " + index)
+    if (index > -1) {
+        console.log("Removing upvote")
+        qna.upvotes.splice(index, 1)
+    }
+    qna.downvotes.push(username)
+    let resp = await qna.save()
+    console.log(resp)
+    return res.json(resp)
 })
 
 app.get('/login', checkNotAuthenticated, (req, res) => {
