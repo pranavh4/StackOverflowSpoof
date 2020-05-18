@@ -98,7 +98,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             _this._resp = data;
             console.log(data);
 
-            if (_this._resp.status == 'Success') {
+            if (_this._resp.status == "Success") {
               console.log("Succesful Login");
               localStorage.setItem("user", JSON.stringify(_this._resp.user));
 
@@ -111,6 +111,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "logout",
         value: function logout() {
+          this.http["delete"]("http://localhost:3000/logout").subscribe(function (data) {});
           localStorage.removeItem("user");
           this.dataSharingService.isUserLoggedIn.next(false);
           this.router.navigate(["/"]);
@@ -1973,67 +1974,73 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     /* harmony import */
 
 
-    var _qand_a_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    var _angular_material_snack_bar__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    /*! @angular/material/snack-bar */
+    "./node_modules/@angular/material/__ivy_ngcc__/fesm2015/snack-bar.js");
+    /* harmony import */
+
+
+    var _qand_a_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
     /*! ../qand-a.service */
     "./src/app/qand-a.service.ts");
     /* harmony import */
 
 
-    var _angular_flex_layout_flex__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+    var _angular_flex_layout_flex__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
     /*! @angular/flex-layout/flex */
     "./node_modules/@angular/flex-layout/__ivy_ngcc__/esm2015/flex.js");
     /* harmony import */
 
 
-    var _angular_material_card__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+    var _angular_material_card__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
     /*! @angular/material/card */
     "./node_modules/@angular/material/__ivy_ngcc__/fesm2015/card.js");
     /* harmony import */
 
 
-    var _angular_common__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
+    var _angular_common__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
     /*! @angular/common */
     "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
     /* harmony import */
 
 
-    var _angular_material_core__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
+    var _angular_material_core__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
     /*! @angular/material/core */
     "./node_modules/@angular/material/__ivy_ngcc__/fesm2015/core.js");
     /* harmony import */
 
 
-    var _angular_material_button__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
+    var _angular_material_button__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
     /*! @angular/material/button */
     "./node_modules/@angular/material/__ivy_ngcc__/fesm2015/button.js");
     /* harmony import */
 
 
-    var _angular_material_badge__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
+    var _angular_material_badge__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
     /*! @angular/material/badge */
     "./node_modules/@angular/material/__ivy_ngcc__/fesm2015/badge.js");
     /* harmony import */
 
 
-    var _angular_material_divider__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
+    var _angular_material_divider__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(
     /*! @angular/material/divider */
     "./node_modules/@angular/material/__ivy_ngcc__/fesm2015/divider.js");
     /* harmony import */
 
 
-    var _angular_material_form_field__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(
+    var _angular_material_form_field__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(
     /*! @angular/material/form-field */
     "./node_modules/@angular/material/__ivy_ngcc__/fesm2015/form-field.js");
     /* harmony import */
 
 
-    var _angular_material_input__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(
+    var _angular_material_input__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(
     /*! @angular/material/input */
     "./node_modules/@angular/material/__ivy_ngcc__/fesm2015/input.js");
     /* harmony import */
 
 
-    var _angular_material_icon__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(
+    var _angular_material_icon__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(
     /*! @angular/material/icon */
     "./node_modules/@angular/material/__ivy_ngcc__/fesm2015/icon.js"); // import { threadId } from 'worker_threads';
 
@@ -2086,7 +2093,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "mat-icon");
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](3, "expand_less");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](3, "arrow_drop_up");
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
@@ -2104,7 +2111,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](5, "mat-icon");
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](6, "expand_more");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](6, "arrow_drop_down");
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
@@ -2132,7 +2139,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "mat-icon");
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](3, "expand_less");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](3, "arrow_drop_up");
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
@@ -2150,7 +2157,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](5, "mat-icon");
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](6, "expand_more");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](6, "arrow_drop_down");
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
@@ -2178,7 +2185,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "mat-icon");
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](3, "expand_less");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](3, "arrow_drop_up");
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
@@ -2196,7 +2203,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](5, "mat-icon");
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](6, "expand_more");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](6, "arrow_drop_down");
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
@@ -2277,7 +2284,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "mat-icon");
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](3, "expand_less");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](3, "arrow_drop_up");
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
@@ -2300,7 +2307,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](5, "mat-icon");
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](6, "expand_more");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](6, "arrow_drop_down");
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
@@ -2333,7 +2340,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "mat-icon");
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](3, "expand_less");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](3, "arrow_drop_up");
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
@@ -2356,7 +2363,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](5, "mat-icon");
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](6, "expand_more");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](6, "arrow_drop_down");
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
@@ -2389,7 +2396,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "mat-icon");
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](3, "expand_less");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](3, "arrow_drop_up");
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
@@ -2412,7 +2419,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](5, "mat-icon");
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](6, "expand_more");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](6, "arrow_drop_down");
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
@@ -2523,11 +2530,11 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](3);
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", answer_r21.profilePic != "");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", answer_r21.profilePic);
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", answer_r21.profilePic == "");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", !answer_r21.profilePic);
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
 
@@ -2572,18 +2579,19 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     }
 
     var PostComponent = /*#__PURE__*/function () {
-      function PostComponent(qAndA, route, formbuilder, router) {
+      function PostComponent(_snackBar, qAndA, route, formbuilder, router) {
         var _this5 = this;
 
         _classCallCheck(this, PostComponent);
 
+        this._snackBar = _snackBar;
         this.qAndA = qAndA;
         this.route = route;
         this.formbuilder = formbuilder;
         this.router = router;
         this.base64textString = [];
         this.route.queryParams.subscribe(function (params) {
-          _this5.questionID = params['questionID'];
+          _this5.questionID = params["questionID"];
         });
 
         this.router.routeReuseStrategy.shouldReuseRoute = function () {
@@ -2595,7 +2603,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             _this5.router.navigated = false;
           }
         });
-        this.user = JSON.parse(localStorage.getItem('user'));
+        this.user = JSON.parse(localStorage.getItem("user"));
         if (this.user) this.currentUser = this.user.username;else this.currentUser = null;
         console.log("current " + this.currentUser);
         this.qAndA.getPost(this.questionID).subscribe(function (data) {
@@ -2610,7 +2618,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             return a.downvotes.indexOf(_this5.currentUser) > -1;
           });
           console.log("profile " + _this5.post.question.profilePic);
-        }); // console.log(this.post.question.profilePic)
+        });
       }
 
       _createClass(PostComponent, [{
@@ -2627,7 +2635,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "handleReaderLoaded",
         value: function handleReaderLoaded(e) {
-          this.base64textString.push('data:image/png;base64,' + btoa(e.target.result));
+          this.base64textString.push("data:image/png;base64," + btoa(e.target.result));
         }
       }, {
         key: "ngOnInit",
@@ -2641,16 +2649,22 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "postAnswer",
         value: function postAnswer() {
-          this.submitted = true;
-          var user = JSON.parse(localStorage.getItem("user")).username;
-          var answer = {
-            questionID: this.questionID,
-            user: user,
-            description: this.answer.value.description,
-            images: this.base64textString
-          };
-          console.log(answer);
-          this.qAndA.postAnswer(answer);
+          if (this.currentUser == null) {
+            this._snackBar.open("Please Login to post answers", "close", {
+              duration: 5000
+            });
+          } else {
+            this.submitted = true;
+            var user = JSON.parse(localStorage.getItem("user")).username;
+            var answer = {
+              questionID: this.questionID,
+              user: user,
+              description: this.answer.value.description,
+              images: this.base64textString
+            };
+            console.log(answer);
+            this.qAndA.postAnswer(answer);
+          }
         }
       }, {
         key: "deleteAnswer",
@@ -2667,18 +2681,30 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         value: function upvote(type, _id, i) {
           var _this6 = this;
 
-          if (type == 'Question') {
-            if (!this.upvotedQues) this.qAndA.upvote(type, _id, this.currentUser).subscribe(function (data) {
-              _this6.post.question = data;
-              _this6.downvotedQues = false;
-              _this6.upvotedQues = true;
+          if (this.currentUser == null) {
+            this._snackBar.open("Please Login to vote", "close", {
+              duration: 2000
             });
           } else {
-            if (!this.upvotedAns[i]) this.qAndA.upvote(type, _id, this.currentUser).subscribe(function (data) {
-              _this6.post.answers[i] = data;
-              _this6.upvotedAns[i] = true;
-              _this6.downvotedAns[i] = false;
-            });
+            if (type == "Question") {
+              if (!this.upvotedQues) this.qAndA.upvote(type, _id, this.currentUser).subscribe(function (data) {
+                var profilePic = _this6.post.question.profilePic;
+                _this6.post.question = Object.assign(Object.assign({}, data), {
+                  profilePic: profilePic
+                });
+                _this6.downvotedQues = false;
+                _this6.upvotedQues = true;
+              });
+            } else {
+              if (!this.upvotedAns[i]) this.qAndA.upvote(type, _id, this.currentUser).subscribe(function (data) {
+                var profilePic = _this6.post.answers[i].profilePic;
+                _this6.post.answers[i] = Object.assign(Object.assign({}, data), {
+                  profilePic: profilePic
+                });
+                _this6.upvotedAns[i] = true;
+                _this6.downvotedAns[i] = false;
+              });
+            }
           }
         }
       }, {
@@ -2686,18 +2712,30 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         value: function downvote(type, _id, i) {
           var _this7 = this;
 
-          if (type == 'Question') {
-            if (!this.downvotedQues) this.qAndA.downvote(type, _id, this.currentUser).subscribe(function (data) {
-              _this7.post.question = data;
-              _this7.downvotedQues = true;
-              _this7.upvotedQues = false;
+          if (this.currentUser == null) {
+            this._snackBar.open("Please Login to vote", "close", {
+              duration: 2000
             });
           } else {
-            if (!this.downvotedAns[i]) this.qAndA.downvote(type, _id, this.currentUser).subscribe(function (data) {
-              _this7.post.answers[i] = data;
-              _this7.upvotedAns[i] = false;
-              _this7.downvotedAns[i] = true;
-            });
+            if (type == "Question") {
+              if (!this.downvotedQues) this.qAndA.downvote(type, _id, this.currentUser).subscribe(function (data) {
+                var profilePic = _this7.post.question.profilePic;
+                _this7.post.question = Object.assign(Object.assign({}, data), {
+                  profilePic: profilePic
+                });
+                _this7.downvotedQues = true;
+                _this7.upvotedQues = false;
+              });
+            } else {
+              if (!this.downvotedAns[i]) this.qAndA.downvote(type, _id, this.currentUser).subscribe(function (data) {
+                var profilePic = _this7.post.answers[i].profilePic;
+                _this7.post.answers[i] = Object.assign(Object.assign({}, data), {
+                  profilePic: profilePic
+                });
+                _this7.upvotedAns[i] = false;
+                _this7.downvotedAns[i] = true;
+              });
+            }
           }
         }
       }, {
@@ -2711,7 +2749,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     }();
 
     PostComponent.ɵfac = function PostComponent_Factory(t) {
-      return new (t || PostComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_qand_a_service__WEBPACK_IMPORTED_MODULE_3__["QandAService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormBuilder"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"]));
+      return new (t || PostComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_material_snack_bar__WEBPACK_IMPORTED_MODULE_3__["MatSnackBar"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_qand_a_service__WEBPACK_IMPORTED_MODULE_4__["QandAService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormBuilder"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"]));
     };
 
     PostComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({
@@ -2719,7 +2757,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       selectors: [["app-post"]],
       decls: 47,
       vars: 15,
-      consts: [["fxLayout", "column", "fxLayoutAlign", "space-between center"], [1, "post-card"], ["mat-card-avatar", "", "class", "post-header-image", "alt", "", 3, "src", 4, "ngIf"], ["mat-card-avatar", "", "class", "post-header-image", "src", "../../assets/images/noDisplay.png", "alt", "", 4, "ngIf"], ["mat-card-image", "", "alt", "", "class", "img", 3, "src", 4, "ngFor", "ngForOf"], ["mat-line", ""], ["mat-icon-button", "", "id", "votes", "matBadgeColor", "primary", 3, "matBadge"], [4, "ngIf"], ["mat-card-subtitle", "", 2, "font-weight", "900", "text-decoration", "underline", "font-size", "32px", "color", "black"], [4, "ngFor", "ngForOf"], ["fxLayout", "row", "fxLayoutAlign", "space-between center", 1, "askA"], [1, "form", 3, "formGroup", "ngSubmit"], ["matInput", "", "formControlName", "description"], ["type", "file", "multiple", "", "accept", "image/*", 3, "change"], ["height", "250", "alt", "", "class", "img", 3, "src", 4, "ngFor", "ngForOf"], ["type", "submit", "mat-raised-button", "", "color", "primary", 3, "disabled"], ["mat-card-avatar", "", "alt", "", 1, "post-header-image", 3, "src"], ["mat-card-avatar", "", "src", "../../assets/images/noDisplay.png", "alt", "", 1, "post-header-image"], ["mat-card-image", "", "alt", "", 1, "img", 3, "src"], ["mat-icon-button", "", 2, "color", "forestgreen", 3, "click"], ["mat-icon-button", "", 3, "click"], ["mat-icon-button", "", 2, "color", "red", 3, "click"], ["height", "250", "alt", "", 1, "img", 3, "src"]],
+      consts: [["fxLayout", "column", "fxLayoutAlign", "space-between center"], [1, "post-card"], ["mat-card-avatar", "", "class", "post-header-image", "alt", "", 3, "src", 4, "ngIf"], ["mat-card-avatar", "", "class", "post-header-image", "src", "./assets/images/noDisplay.png", "alt", "", 4, "ngIf"], ["mat-card-image", "", "alt", "", "class", "img", 3, "src", 4, "ngFor", "ngForOf"], ["mat-line", ""], ["mat-icon-button", "", "id", "votes", "matBadgeColor", "primary", 3, "matBadge"], [4, "ngIf"], ["mat-card-subtitle", "", 2, "font-weight", "900", "text-decoration", "underline", "font-size", "32px", "color", "black"], [4, "ngFor", "ngForOf"], ["fxLayout", "row", "fxLayoutAlign", "space-between center", 1, "askA"], [1, "form", 3, "formGroup", "ngSubmit"], ["matInput", "", "formControlName", "description"], ["type", "file", "multiple", "", "accept", "image/*", 3, "change"], ["height", "250", "alt", "", "class", "img", 3, "src", 4, "ngFor", "ngForOf"], ["type", "submit", "mat-raised-button", "", "color", "primary", 3, "disabled"], ["mat-card-avatar", "", "alt", "", 1, "post-header-image", 3, "src"], ["mat-card-avatar", "", "src", "./assets/images/noDisplay.png", "alt", "", 1, "post-header-image"], ["mat-card-image", "", "alt", "", 1, "img", 3, "src"], ["mat-icon-button", "", 2, "color", "forestgreen", "background-color", "rgb(155, 218, 155)", 3, "click"], ["mat-icon-button", "", 3, "click"], ["mat-icon-button", "", 2, "color", "red", "background-color", "rgb(255, 153, 153)", 3, "click"], ["height", "250", "alt", "", 1, "img", 3, "src"]],
       template: function PostComponent_Template(rf, ctx) {
         if (rf & 1) {
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 0);
@@ -2864,11 +2902,11 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         if (rf & 2) {
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](3);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx.post.question.profilePic != "");
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx.post.question.profilePic);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx.post.question.profilePic == "");
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", !ctx.post.question.profilePic);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
 
@@ -2923,7 +2961,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("disabled", !ctx.answer.valid);
         }
       },
-      directives: [_angular_flex_layout_flex__WEBPACK_IMPORTED_MODULE_4__["DefaultLayoutDirective"], _angular_flex_layout_flex__WEBPACK_IMPORTED_MODULE_4__["DefaultLayoutAlignDirective"], _angular_material_card__WEBPACK_IMPORTED_MODULE_5__["MatCard"], _angular_material_card__WEBPACK_IMPORTED_MODULE_5__["MatCardHeader"], _angular_common__WEBPACK_IMPORTED_MODULE_6__["NgIf"], _angular_material_card__WEBPACK_IMPORTED_MODULE_5__["MatCardTitle"], _angular_material_card__WEBPACK_IMPORTED_MODULE_5__["MatCardSubtitle"], _angular_common__WEBPACK_IMPORTED_MODULE_6__["NgForOf"], _angular_material_card__WEBPACK_IMPORTED_MODULE_5__["MatCardContent"], _angular_material_core__WEBPACK_IMPORTED_MODULE_7__["MatLine"], _angular_material_button__WEBPACK_IMPORTED_MODULE_8__["MatButton"], _angular_material_badge__WEBPACK_IMPORTED_MODULE_9__["MatBadge"], _angular_material_divider__WEBPACK_IMPORTED_MODULE_10__["MatDivider"], _angular_forms__WEBPACK_IMPORTED_MODULE_1__["ɵangular_packages_forms_forms_y"], _angular_forms__WEBPACK_IMPORTED_MODULE_1__["NgControlStatusGroup"], _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormGroupDirective"], _angular_material_form_field__WEBPACK_IMPORTED_MODULE_11__["MatFormField"], _angular_material_form_field__WEBPACK_IMPORTED_MODULE_11__["MatLabel"], _angular_material_input__WEBPACK_IMPORTED_MODULE_12__["MatInput"], _angular_forms__WEBPACK_IMPORTED_MODULE_1__["DefaultValueAccessor"], _angular_forms__WEBPACK_IMPORTED_MODULE_1__["NgControlStatus"], _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormControlName"], _angular_material_form_field__WEBPACK_IMPORTED_MODULE_11__["MatError"], _angular_material_card__WEBPACK_IMPORTED_MODULE_5__["MatCardAvatar"], _angular_material_card__WEBPACK_IMPORTED_MODULE_5__["MatCardImage"], _angular_material_card__WEBPACK_IMPORTED_MODULE_5__["MatCardActions"], _angular_material_icon__WEBPACK_IMPORTED_MODULE_13__["MatIcon"]],
+      directives: [_angular_flex_layout_flex__WEBPACK_IMPORTED_MODULE_5__["DefaultLayoutDirective"], _angular_flex_layout_flex__WEBPACK_IMPORTED_MODULE_5__["DefaultLayoutAlignDirective"], _angular_material_card__WEBPACK_IMPORTED_MODULE_6__["MatCard"], _angular_material_card__WEBPACK_IMPORTED_MODULE_6__["MatCardHeader"], _angular_common__WEBPACK_IMPORTED_MODULE_7__["NgIf"], _angular_material_card__WEBPACK_IMPORTED_MODULE_6__["MatCardTitle"], _angular_material_card__WEBPACK_IMPORTED_MODULE_6__["MatCardSubtitle"], _angular_common__WEBPACK_IMPORTED_MODULE_7__["NgForOf"], _angular_material_card__WEBPACK_IMPORTED_MODULE_6__["MatCardContent"], _angular_material_core__WEBPACK_IMPORTED_MODULE_8__["MatLine"], _angular_material_button__WEBPACK_IMPORTED_MODULE_9__["MatButton"], _angular_material_badge__WEBPACK_IMPORTED_MODULE_10__["MatBadge"], _angular_material_divider__WEBPACK_IMPORTED_MODULE_11__["MatDivider"], _angular_forms__WEBPACK_IMPORTED_MODULE_1__["ɵangular_packages_forms_forms_y"], _angular_forms__WEBPACK_IMPORTED_MODULE_1__["NgControlStatusGroup"], _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormGroupDirective"], _angular_material_form_field__WEBPACK_IMPORTED_MODULE_12__["MatFormField"], _angular_material_form_field__WEBPACK_IMPORTED_MODULE_12__["MatLabel"], _angular_material_input__WEBPACK_IMPORTED_MODULE_13__["MatInput"], _angular_forms__WEBPACK_IMPORTED_MODULE_1__["DefaultValueAccessor"], _angular_forms__WEBPACK_IMPORTED_MODULE_1__["NgControlStatus"], _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormControlName"], _angular_material_form_field__WEBPACK_IMPORTED_MODULE_12__["MatError"], _angular_material_card__WEBPACK_IMPORTED_MODULE_6__["MatCardAvatar"], _angular_material_card__WEBPACK_IMPORTED_MODULE_6__["MatCardImage"], _angular_material_card__WEBPACK_IMPORTED_MODULE_6__["MatCardActions"], _angular_material_icon__WEBPACK_IMPORTED_MODULE_14__["MatIcon"]],
       styles: [".post-card[_ngcontent-%COMP%] {\n  width: 800px;\n}\n\n.list[_ngcontent-%COMP%] {\n  padding: 10px;\n}\n\n#votes[_ngcontent-%COMP%] {\n  background-color: rgba(98, 168, 5, 0.486);\n  width: 60px;\n}\n\n#head[_ngcontent-%COMP%] {\n  font-weight: 900;\n  font-size: 30px;\n}\n\n.rectangle[_ngcontent-%COMP%] {\n  height: 8px;\n  border-radius: 10px;\n  background-color: #F48024;\n  width: 20%;\n  align-self: center;\n  display: flex;\n}\n\n#answers[_ngcontent-%COMP%] {\n  width: 70%;\n  text-align: start;\n}\n\n.img[_ngcontent-%COMP%] {\n  text-align: center;\n  width: 80%;\n  padding-left: 100px;\n}\n\n.mat-card[_ngcontent-%COMP%] {\n  margin: 30px;\n}\n\n.askA[_ngcontent-%COMP%] {\n  width: 100%;\n  min-height: 59%;\n}\n\n.mat-card-avatar[_ngcontent-%COMP%] {\n  border-radius: 50%;\n  flex-shrink: 0;\n}\n\n.form[_ngcontent-%COMP%] {\n  margin: 0% 15% 20px 15%;\n  max-width: 90%;\n  padding: 35px;\n  width: 100%;\n  border-radius: 10px;\n  border-style: outset;\n}\n\n.mat-form-field[_ngcontent-%COMP%] {\n  width: 100%;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9ob21lL3ByYW5hdi9Db2RpbmcvNnRoIFNlbS9XZWJfUHJvamVjdC9zcmMvYXBwL3Bvc3QvcG9zdC5jb21wb25lbnQuc2NzcyIsInNyYy9hcHAvcG9zdC9wb3N0LmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0ksWUFBQTtBQ0NKOztBREVBO0VBQ0ksYUFBQTtBQ0NKOztBREVBO0VBQ0kseUNBQUE7RUFDQSxXQUFBO0FDQ0o7O0FERUE7RUFDSSxnQkFBQTtFQUNBLGVBQUE7QUNDSjs7QURFQTtFQUNJLFdBQUE7RUFDQSxtQkFBQTtFQUNBLHlCQUFBO0VBQ0EsVUFBQTtFQUNBLGtCQUFBO0VBQ0EsYUFBQTtBQ0NKOztBREVBO0VBQ0ksVUFBQTtFQUNBLGlCQUFBO0FDQ0o7O0FERUE7RUFDSSxrQkFBQTtFQUNBLFVBQUE7RUFDQSxtQkFBQTtBQ0NKOztBREVBO0VBQ0ksWUFBQTtBQ0NKOztBREVBO0VBQ0ksV0FBQTtFQUNBLGVBQUE7QUNDSjs7QURFQTtFQUNJLGtCQUFBO0VBQ0EsY0FBQTtBQ0NKOztBREVBO0VBRUksdUJBQUE7RUFDQSxjQUFBO0VBQ0EsYUFBQTtFQUNBLFdBQUE7RUFDQSxtQkFBQTtFQUNBLG9CQUFBO0FDQUo7O0FER0E7RUFDSSxXQUFBO0FDQUoiLCJmaWxlIjoic3JjL2FwcC9wb3N0L3Bvc3QuY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIucG9zdC1jYXJkIHtcbiAgICB3aWR0aDogODAwcHg7XG59XG5cbi5saXN0IHtcbiAgICBwYWRkaW5nOiAxMHB4O1xufVxuXG4jdm90ZXMge1xuICAgIGJhY2tncm91bmQtY29sb3I6IHJnYmEoOTgsIDE2OCwgNSwgMC40ODYpO1xuICAgIHdpZHRoOiA2MHB4O1xufVxuXG4jaGVhZCB7XG4gICAgZm9udC13ZWlnaHQ6IDkwMDtcbiAgICBmb250LXNpemU6IDMwcHg7XG59XG5cbi5yZWN0YW5nbGUge1xuICAgIGhlaWdodDogOHB4O1xuICAgIGJvcmRlci1yYWRpdXM6IDEwcHg7XG4gICAgYmFja2dyb3VuZC1jb2xvcjogI0Y0ODAyNDtcbiAgICB3aWR0aDogMjAlO1xuICAgIGFsaWduLXNlbGY6IGNlbnRlcjtcbiAgICBkaXNwbGF5OiBmbGV4O1xufVxuXG4jYW5zd2VycyB7XG4gICAgd2lkdGg6IDcwJTtcbiAgICB0ZXh0LWFsaWduOiBzdGFydDtcbn1cblxuLmltZyB7XG4gICAgdGV4dC1hbGlnbjogY2VudGVyO1xuICAgIHdpZHRoOiA4MCU7XG4gICAgcGFkZGluZy1sZWZ0OiAxMDBweDtcbn1cblxuLm1hdC1jYXJkIHtcbiAgICBtYXJnaW46IDMwcHg7XG59XG5cbi5hc2tBIHtcbiAgICB3aWR0aDogMTAwJTtcbiAgICBtaW4taGVpZ2h0OiA1OSU7XG59XG5cbi5tYXQtY2FyZC1hdmF0YXIge1xuICAgIGJvcmRlci1yYWRpdXM6IDUwJTtcbiAgICBmbGV4LXNocmluazogMDtcbn1cblxuLmZvcm0ge1xuICAgIC8vIG1pbi13aWR0aDogMTUwcHg7XG4gICAgbWFyZ2luOiAwJSAxNSUgMjBweCAxNSU7XG4gICAgbWF4LXdpZHRoOiA5MCU7XG4gICAgcGFkZGluZzogMzVweDtcbiAgICB3aWR0aDogMTAwJTtcbiAgICBib3JkZXItcmFkaXVzOiAxMHB4O1xuICAgIGJvcmRlci1zdHlsZTogb3V0c2V0O1xufVxuXG4ubWF0LWZvcm0tZmllbGQge1xuICAgIHdpZHRoOiAxMDAlO1xufVxuIiwiLnBvc3QtY2FyZCB7XG4gIHdpZHRoOiA4MDBweDtcbn1cblxuLmxpc3Qge1xuICBwYWRkaW5nOiAxMHB4O1xufVxuXG4jdm90ZXMge1xuICBiYWNrZ3JvdW5kLWNvbG9yOiByZ2JhKDk4LCAxNjgsIDUsIDAuNDg2KTtcbiAgd2lkdGg6IDYwcHg7XG59XG5cbiNoZWFkIHtcbiAgZm9udC13ZWlnaHQ6IDkwMDtcbiAgZm9udC1zaXplOiAzMHB4O1xufVxuXG4ucmVjdGFuZ2xlIHtcbiAgaGVpZ2h0OiA4cHg7XG4gIGJvcmRlci1yYWRpdXM6IDEwcHg7XG4gIGJhY2tncm91bmQtY29sb3I6ICNGNDgwMjQ7XG4gIHdpZHRoOiAyMCU7XG4gIGFsaWduLXNlbGY6IGNlbnRlcjtcbiAgZGlzcGxheTogZmxleDtcbn1cblxuI2Fuc3dlcnMge1xuICB3aWR0aDogNzAlO1xuICB0ZXh0LWFsaWduOiBzdGFydDtcbn1cblxuLmltZyB7XG4gIHRleHQtYWxpZ246IGNlbnRlcjtcbiAgd2lkdGg6IDgwJTtcbiAgcGFkZGluZy1sZWZ0OiAxMDBweDtcbn1cblxuLm1hdC1jYXJkIHtcbiAgbWFyZ2luOiAzMHB4O1xufVxuXG4uYXNrQSB7XG4gIHdpZHRoOiAxMDAlO1xuICBtaW4taGVpZ2h0OiA1OSU7XG59XG5cbi5tYXQtY2FyZC1hdmF0YXIge1xuICBib3JkZXItcmFkaXVzOiA1MCU7XG4gIGZsZXgtc2hyaW5rOiAwO1xufVxuXG4uZm9ybSB7XG4gIG1hcmdpbjogMCUgMTUlIDIwcHggMTUlO1xuICBtYXgtd2lkdGg6IDkwJTtcbiAgcGFkZGluZzogMzVweDtcbiAgd2lkdGg6IDEwMCU7XG4gIGJvcmRlci1yYWRpdXM6IDEwcHg7XG4gIGJvcmRlci1zdHlsZTogb3V0c2V0O1xufVxuXG4ubWF0LWZvcm0tZmllbGQge1xuICB3aWR0aDogMTAwJTtcbn0iXX0= */"]
     });
     /*@__PURE__*/
@@ -2932,13 +2970,15 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](PostComponent, [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"],
         args: [{
-          selector: 'app-post',
-          templateUrl: './post.component.html',
-          styleUrls: ['./post.component.scss']
+          selector: "app-post",
+          templateUrl: "./post.component.html",
+          styleUrls: ["./post.component.scss"]
         }]
       }], function () {
         return [{
-          type: _qand_a_service__WEBPACK_IMPORTED_MODULE_3__["QandAService"]
+          type: _angular_material_snack_bar__WEBPACK_IMPORTED_MODULE_3__["MatSnackBar"]
+        }, {
+          type: _qand_a_service__WEBPACK_IMPORTED_MODULE_4__["QandAService"]
         }, {
           type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"]
         }, {
@@ -3263,11 +3303,11 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         if (rf & 2) {
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx.user.profilePic.length != 0);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx.user.profilePic);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx.user.profilePic.length == 0);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", !ctx.user.profilePic);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](3);
 
@@ -3691,7 +3731,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpropertyInterpolate"]("matBadge", question_r3.upvotes - question_r3.downvotes);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpropertyInterpolate"]("matBadge", question_r3.upvotes.length - question_r3.downvotes.length);
       }
     }
 
@@ -3703,7 +3743,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "div", 5);
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](3, "Questions");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](3, " Questions");
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
@@ -3731,7 +3771,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "div", 5);
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](3, "No Results found for the Query");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](3, " No Results found for the Query");
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
@@ -3973,7 +4013,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     SignupComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({
       type: SignupComponent,
       selectors: [["app-signup"]],
-      decls: 37,
+      decls: 40,
       vars: 7,
       consts: [["fxLayout", "row", "fxLayoutAlign", "center center", 1, "signup"], ["id", "writeup"], [2, "font-weight", "900"], [1, "material-icons"], [3, "formGroup", "ngSubmit"], ["appearance", "outline"], ["matInput", "", "placeholder", "JohnDoe123", "formControlName", "username"], ["matInput", "", "placeholder", "Johndoe@email.com", "formControlName", "email", "pattern", "[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,}$"], ["matInput", "", "formControlName", "password", "required", "", 3, "type"], ["mat-icon-button", "", "type", "button", "matSuffix", "", 3, "click"], ["type", "file", "formControlName", "profilePic", "accept", "image/*", 3, "change"], ["height", "200px", "alt", "", "id", "img", 3, "src"], ["type", "submit", "mat-raised-button", "", "color", "primary", 3, "disabled"]],
       template: function SignupComponent_Template(rf, ctx) {
@@ -4070,29 +4110,37 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](28, "br");
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](29, "input", 10);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](29, "label", 2);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("change", function SignupComponent_Template_input_change_29_listener($event) {
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](30, "Select a profile picture");
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](31, "br");
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](32, "input", 10);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("change", function SignupComponent_Template_input_change_32_listener($event) {
             return ctx.onUploadChange($event);
           });
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](30, "br");
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](31, "br");
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](32, "img", 11);
-
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](33, "br");
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](34, "button", 12);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](34, "br");
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](35, "Register");
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](35, "img", 11);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](36, "br");
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](37, "button", 12);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](38, "Register");
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](36, "br");
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](39, "br");
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
@@ -4116,7 +4164,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate"](ctx.hide ? "visibility_off" : "visibility");
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](7);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](10);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpropertyInterpolate"]("src", ctx.base64textString, _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵsanitizeUrl"]);
 

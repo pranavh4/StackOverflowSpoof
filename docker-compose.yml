@@ -1,0 +1,16 @@
+version: "3"
+services:
+  web:
+    image: stack-overflow-node
+    build: .
+    command: "node index.js"
+    ports:
+      - "3000:3000"
+    depends_on:
+      - "mongo"
+    environment:
+      WAIT_HOSTS: mongo:27017
+  mongo:
+    image: "mongo"
+    ports:
+      - "27017:27017"

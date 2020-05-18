@@ -17,7 +17,7 @@ const passport = require('passport')
 const session = require('express-session')
 var cookieParser = require('cookie-parser')
 
-mongoose.connect('mongodb://localhost/stack_overflow', { useNewUrlParser: true });
+mongoose.connect('mongodb://mongo:27017/stack_overflow', { useNewUrlParser: true });
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function () {
@@ -242,7 +242,16 @@ app.post('/downvote', async (req, res) => {
     return res.json(resp)
 })
 
+app.delete('/logout', (req,res)=>{
+    req.logOut()
+    return res.json({status:"Success"})
+})
+
 app.get('/login', checkNotAuthenticated, (req, res) => {
+    res.sendFile(path.join(__dirname, 'dist/StackOverflow/index.html'));
+});
+
+app.get('/signup', checkNotAuthenticated, (req, res) => {
     res.sendFile(path.join(__dirname, 'dist/StackOverflow/index.html'));
 });
 
