@@ -246,7 +246,7 @@ app.get('/login', checkNotAuthenticated, (req, res) => {
     res.sendFile(path.join(__dirname, 'dist/StackOverflow/index.html'));
 });
 
-app.get('*', checkAuthenticated, (req, res) => {
+app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, 'dist/StackOverflow/index.html'));
 });
 
