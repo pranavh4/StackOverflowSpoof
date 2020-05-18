@@ -192,15 +192,16 @@ app.delete('/deleteQuestion/:id', async (req, res) => {
 })
 
 app.post('/upvote', async (req, res) => {
-    let { type, _id } = req.body
+    let { type, _id, username } = req.body
     let qna
     if (type == 'Question')
-        qna = Question.findById(_id)
+        qna = await Question.findById(_id).exec()
     else
-        qna = Answer.findById(_id)
+        qna = await Answer.findById(_id).exec()
+    console.log(qna)
     qna.upvotes += 1
-    let resp = qna.save()
-    console.log(resp)
+    let resp = await qna.save()
+    return res.json({ status: 'Success' })
 })
 
 app.get('/login', checkNotAuthenticated, (req, res) => {

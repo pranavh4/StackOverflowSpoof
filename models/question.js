@@ -6,8 +6,8 @@ var questionSchema = new mongoose.Schema({
     description: String,
     images: [String],
     keywords: [String],
-    upvotes: Number,
-    downvotes: Number
+    upvotes: [String],
+    downvotes: [String]
 });
 
 module.exports = mongoose.model('Question', questionSchema);
