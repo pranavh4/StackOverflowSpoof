@@ -61,8 +61,9 @@ app.use(cors({
     ], credentials: true
 }));
 app.use(cookieParser(process.env.SESSION_SECRET))
-app.use(bodyparser.json());
-app.use(bodyparser.urlencoded({ extended: true }));
+app.use(bodyparser.json({ extended: true, limit: '50mb' }));
+app.use(bodyparser.urlencoded({ extended: true, limit: '50mb' }));
+
 app.use(session({
     secret: process.env.SESSION_SECRET,
     resave: false,
@@ -95,7 +96,7 @@ app.post('/login', checkNotAuthenticated, function (req, res, next) {
         console.log(req.body)
         if (err) { return next(err); }
         if (!user) {
-            return res.json({ status: "Failure" }, ...info);
+            return res.json({ status: "Failure" });
             // console.log("Error logging in")
             // return res.redirect('/login')
         }
@@ -121,10 +122,12 @@ app.post('/register', async (req, res) => {
     return res.json({ status: 'Success' })
 })
 
-app.post('/submitQuestion', (req, res) => {
+app.post('/submitQuestion', async (req, res) => {
+    // console.log(req.body)
     let ques = new Question({ ...req.body, keywords: generateKeywords(req.body.heading), upvotes: 0, downvotes: 0 })
-    ques.save()
-    return res.json({ status: 'Success' })
+    let resp = await ques.save()
+    // console.log(resp)
+    return res.json({ status: 'Success', questionID: resp._id })
 })
 
 app.post('/submitAnswer', (req, res) => {
@@ -170,6 +173,35 @@ app.get('/getUserQuestions', async (req, res) => {
     return res.json({ askedQuestions: ques, answeredQuestions: q_ans })
 })
 
+app.delete('/deleteAnswer/:id', async (req, res) => {
+    let _id = req.params.id
+    let resp = await Answer.deleteOne({ _id: _id }).exec()
+    console.log(resp)
+    if (resp.ok == 1)
+        return res.json({ status: 'Success' })
+    return res.json({ status: 'Failure' })
+})
+
+app.delete('/deleteQuestion/:id', async (req, res) => {
+    let _id = req.params.id
+    let resp = await Question.deleteOne({ _id: _id }).exec()
+    await Answer.deleteMany({ questionID: _id })
+    if (resp.ok == 1)
+        return res.json({ status: 'Success' })
+    return res.json({ status: 'Failure' })
+})
+
+app.post('/upvote', async (req, res) => {
+    let { type, _id } = req.body
+    let qna
+    if (type == 'Question')
+        qna = Question.findById(_id)
+    else
+        qna = Answer.findById(_id)
+    qna.upvotes += 1
+    let resp = qna.save()
+    console.log(resp)
+})
 
 app.get('/login', checkNotAuthenticated, (req, res) => {
     res.sendFile(path.join(__dirname, 'dist/StackOverflow/index.html'));
