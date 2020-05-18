@@ -16,8 +16,21 @@ const initializePassport = require('./passport-config')
 const passport = require('passport')
 const session = require('express-session')
 var cookieParser = require('cookie-parser')
+const bcrypt = require('bcrypt')
 
-mongoose.connect('mongodb://mongo:27017/stack_overflow', { useNewUrlParser: true });
+// mongoose.connect('mongodb://mongo:27017/stack_overflow', { useNewUrlParser: true, server:{ auto_reconnect: true } });
+var mongoUrl = "mongodb://mongo:27017/stack_overflow"
+
+var connectWithRetry = function() {
+  return mongoose.connect(mongoUrl, function(err) {
+    if (err) {
+      console.error('Failed to connect to mongo on startup - retrying in 2 sec', err);
+      setTimeout(connectWithRetry, 2000);
+    }
+  });
+};
+connectWithRetry();
+
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function () {
@@ -110,16 +123,28 @@ app.post('/login', checkNotAuthenticated, function (req, res, next) {
 });
 
 app.post('/register', async (req, res) => {
-    console.log("Got request")
-    let user = new User(req.body)
-    console.log(req.body);
+    // console.log("Got request")
+
+    let user = req.body
+    // console.log(req.body);
     let usr = await User.findOne({ email: user.email }).exec();
     if (usr) return res.json({ status: 'An Account With this Email Already Exists, Please Log in' })
     usr = await User.findOne({ username: user.username }).exec();
     if (usr) return res.json({ status: 'Username Already Exists' })
 
-    user.save()
-    return res.json({ status: 'Success' })
+    try{
+        let hashedPassword = await bcrypt.hash(user.password, 10)
+        // console.log(hashedPassword)
+        user.password = hashedPassword
+        // console.log(user)
+        let us = new User(user)
+        // console.log(us)
+        us.save()
+        return res.json({ status: 'Success' })
+    }
+    catch(e){
+        return res.json({status: 'Failure'})
+    }
 })
 
 app.post('/submitQuestion', async (req, res) => {
@@ -147,7 +172,7 @@ app.get('/getPost', async (req, res) => {
     let ques = await Question.findById(questionID).lean()
     let u = await User.findOne({username:ques.user}).exec()
     ques.profilePic = u.profilePic
-    console.log(ans)
+    // console.log(ans)
     return res.json({ status: "Success", question: ques, answers: ans })
 })
 
@@ -170,7 +195,7 @@ app.get('/findQuestions', async (req, res) => {
 
 app.get('/currentUser', async (req, res) => {
     let user = await req.user
-    console.log(req.cookies)
+    // console.log(req.cookies)
     return res.json(user)
 })
 
@@ -179,7 +204,7 @@ app.get('/getUserQuestions', async (req, res) => {
     let ques = await Question.find({ user: username }).sort({ upvotes: -1 }).exec()
     let ans = await Answer.find({ user: username })
     ans = ans.map(a => a.questionID)
-    console.log(ans)
+    // console.log(ans)
     let q_ans = await Question.find({ _id: { $in: ans } }).exec()
     return res.json({ askedQuestions: ques, answeredQuestions: q_ans })
 })
@@ -187,7 +212,7 @@ app.get('/getUserQuestions', async (req, res) => {
 app.delete('/deleteAnswer/:id', async (req, res) => {
     let _id = req.params.id
     let resp = await Answer.deleteOne({ _id: _id }).exec()
-    console.log(resp)
+    // console.log(resp)
     if (resp.ok == 1)
         return res.json({ status: 'Success' })
     return res.json({ status: 'Failure' })
@@ -213,12 +238,12 @@ app.post('/upvote', async (req, res) => {
     let index = qna.downvotes.indexOf(username)
     console.log("index " + index)
     if (index > -1) {
-        console.log("Removing downvote")
+        // console.log("Removing downvote")
         qna.downvotes.splice(index, 1)
     }
     qna.upvotes.push(username)
     let resp = await qna.save()
-    console.log(resp)
+    // console.log(resp)
     return res.json(resp)
 })
 
@@ -231,14 +256,14 @@ app.post('/downvote', async (req, res) => {
         qna = await Answer.findById(_id).exec()
     // console.log(qna)
     let index = qna.upvotes.indexOf(username)
-    console.log("index " + index)
+    // console.log("index " + index)
     if (index > -1) {
-        console.log("Removing upvote")
+        // console.log("Removing upvote")
         qna.upvotes.splice(index, 1)
     }
     qna.downvotes.push(username)
     let resp = await qna.save()
-    console.log(resp)
+    // console.log(resp)
     return res.json(resp)
 })
 
@@ -255,6 +280,14 @@ app.get('/signup', checkNotAuthenticated, (req, res) => {
     res.sendFile(path.join(__dirname, 'dist/StackOverflow/index.html'));
 });
 
+app.get('/profile', checkAuthenticated, (req,res)=>{
+    res.sendFile(path.join(__dirname, 'dist/StackOverflow/index.html'));
+})
+
+app.get('/askQuestion', checkAuthenticated, (req,res)=>{
+    res.sendFile(path.join(__dirname, 'dist/StackOverflow/index.html'));
+})
+
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, 'dist/StackOverflow/index.html'));
 });
@@ -268,17 +301,17 @@ server.listen(port, () => console.log('Running'))
 
 function checkAuthenticated(req, res, next) {
     if (req.isAuthenticated()) {
-        console.log("Authenticated")
+        // console.log("Authenticated")
         return next()
     }
-    console.log("not authenticated")
+    // console.log("not authenticated")
     return res.redirect('/login')
 }
 
 function checkNotAuthenticated(req, res, next) {
-    console.log(req.isAuthenticated())
+    // console.log(req.isAuthenticated())
     if (req.isAuthenticated()) {
-        console.log("authed")
+        // console.log("authed")
         return res.redirect('/')
     }
     next()
