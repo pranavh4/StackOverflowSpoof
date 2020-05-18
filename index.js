@@ -139,14 +139,25 @@ app.post('/submitAnswer', (req, res) => {
 
 app.get('/getPost', async (req, res) => {
     let { questionID } = req.query
-    let ans = await Answer.find({ questionID: questionID }).sort({ upvotes: -1 }).exec()
-    let ques = await Question.findById(questionID)
+    let ans = await Answer.find({ questionID: questionID }).sort({ upvotes: -1 }).lean()
+    for(i=0;i<ans.length;i++){
+        let u = await User.findOne({username:ans[i].user}).exec()
+        ans[i].profilePic = u.profilePic
+    }
+    let ques = await Question.findById(questionID).lean()
+    let u = await User.findOne({username:ques.user}).exec()
+    ques.profilePic = u.profilePic
+    console.log(ans)
     return res.json({ status: "Success", question: ques, answers: ans })
 })
 
 app.get('/findQuestions', async (req, res) => {
     let { queryString } = req.query
     // console.log(req.query)
+    if (queryString==''){
+        let ques = await Question.find().exec()
+        return res.json({ status: "Success", questions: ques })
+    }
     let words = generateKeywords(queryString)
     let ques = await Question.find({ keywords: { $in: words } }).exec()
     return res.json({ status: "Success", questions: ques })
